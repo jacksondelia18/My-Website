@@ -6,7 +6,16 @@ Homeworks
 HW1 [homework1.html]()
 
 
+___
 
-This is a Quarto website.
+
+*Fun Fact*:
+Jackson is a Beekeeper 🐝
+
+___
+
+
+
+*This is a Quarto website.*
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
