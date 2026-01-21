@@ -1,6 +1,11 @@
 ---
-title: "MyPage"
+title: "Jackson D'Elia"
 ---
+Homeworks
+
+HW1 [homework1.html]()
+
+
 
 This is a Quarto website.
 
