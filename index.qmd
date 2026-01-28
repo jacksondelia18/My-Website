@@ -3,7 +3,8 @@ title: "Jackson D'Elia"
 ---
 Homeworks
 
-HW1 [homework1.html](HW3.html)
+HW1: [HW3.html]
+
 
 
 ___
