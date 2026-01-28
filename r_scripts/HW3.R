@@ -1,14 +1,6 @@
----
-title: "Homework 3"
-format: html
----
-########HW3
+#Title: HW3
+#### Q1
 
-
-here is my R code
-
-
-```{r}
 
 # Suppose x = 1.1, a = 2.2, and b = 3.3. Assign each expression to the value of the variable z and print the value stored in z.
 
@@ -142,5 +134,3 @@ q #removes all div/7
 final <- q
 final
 
-
-```
