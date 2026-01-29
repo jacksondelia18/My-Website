@@ -75,8 +75,8 @@ reversed_vector
 
 ##Q3
 ```{r}
-set.seed(10)
-vectorD <- runif(2, min=1, max=10,) #find two random numbers 1-10
+set.seed(15)
+vectorD <- runif(2, min = 1, max = 10) #find two random numbers 1-10
 vectorD
 y <- vectorD[1]
 y
