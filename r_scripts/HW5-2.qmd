@@ -81,6 +81,6 @@ which(!complete.cases(df))
 orderedDF <- df[order(df[, 2]), ]
 orderedDF
 
-mean(orderedDF$my_units, na.rm=T))
+mean(orderedDF$my_units, na.rm=T)
 
 ```
