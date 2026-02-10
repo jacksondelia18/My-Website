@@ -84,3 +84,178 @@ hardy_weinberg(p=0.3)
 
 x <- 5
 x
+
+
+#global v local parameters
+my_function <- function(a=3, b=4){
+  z<- a+b
+  return(z)
+
+
+}
+
+my_function()
+
+
+my_bad_function <- function(a=3){
+  b=8
+  z<- a+b
+  return(z)
+}
+my_bad_function()
+#########################
+#variable delcared globally but referenced locally can cause issues
+
+
+
+#passing global variables properly
+
+a <-32
+b <- 4
+func <- function(first, second){
+  z<- first + second
+  return(z)
+
+
+}
+func(first=a, second=b)
+
+
+#errors and warnings in function
+
+
+##########################################
+#START OF FUNCTION
+hardy_weinberg <- function(p = runif(1)){
+##########################################
+  #Hardy weinberg my beloved
+  #FUNCTION: H_W
+  #operation: runs hardy-weinberg equilibrium problem
+  #inputs = p: allele frequecny of dom allele
+  #output = q: (rec allele): the frequencies of the three genotypes (fAA, fAB, fBB)
+  if(p>1 | p<0){
+    return("function failure. p must be greater than zero and less than 1!")
+
+  }
+#control structure stops function if p value is nonsensical
+#and returns custom error message
+
+  
+  q <- 1 - p
+  fAA <- p^2
+  fAB <- 2*p*q
+  fBB <- q^2
+
+  #store data for output
+  out_vec <- signif(c(p = p, AA = fAA, BB = fBB, AB = fAB), digits = 3)
+
+  return(out_vec) #return those values
+  
+}
+
+
+##########################################
+
+hardy_weinberg(03)
+
+
+#using STOP 
+##########################################
+#START OF FUNCTION
+hardy_weinberg <- function(p = runif(1)){
+##########################################
+  #Hardy weinberg my beloved
+  #FUNCTION: H_W
+  #operation: runs hardy-weinberg equilibrium problem
+  #inputs = p: allele frequecny of dom allele
+  #output = q: (rec allele): the frequencies of the three genotypes (fAA, fAB, fBB)
+  if(p>1 | p<0){
+    stop("function failure. p must be greater than zero and less than 1!")
+
+  }
+#control structure stops function if p value is nonsensical
+#and returns custom error message
+
+  
+  q <- 1 - p
+  fAA <- p^2
+  fAB <- 2*p*q
+  fBB <- q^2
+
+  #store data for output
+  out_vec <- signif(c(p = p, AA = fAA, BB = fBB, AB = fAB), digits = 3)
+
+  return(out_vec) #return those values
+  
+}
+
+
+##########################################
+hardy_weinberg(4) #returns error message
+hardy_weinberg(0.4) # correct function
+
+
+
+#regression function
+
+
+##########################################
+#START OF FUNCTION
+#function fit_linear
+#intent: fits a simple linear regression
+#inputs: numeric vector of predictors x and response y
+#output: slope and p value
+
+fit_linear<- function(x = runif(20), y=runif(20)){
+
+  my_mod <- lm(y~x)
+  my_out <- c(slope=summary(my_mod)$coefficients[2,1], 
+  p_value=summary(my_mod)$coefficients[2,4])
+
+  #plot the output
+  plot(x=x, y=y)
+  return(my_out)
+
+
+}
+#END OF FUNCTION
+##########################################
+
+
+var1<- 1:20
+var2<- 21:40
+
+fit_linear(x = var1, y=var2)
+
+
+
+##########################################
+#START OF FUNCTION
+#function fit_linear
+#intent: fits a simple linear regression
+#inputs: numeric vector of predictors x and response y
+#output: slope and p value
+
+fit_linear<- function(p=NULL){
+
+if(is.null(p)){
+  p <- list(x=runif(20), y= runif(20))
+}
+
+  my_mod <- lm(p$x~p$y) #fits the model
+
+
+  my_out <- c(slope=summary(my_mod)$coefficients[2,1], 
+  p_value=summary(my_mod)$coefficients[2,4])
+
+  plot(x=p$x, y=p$y)
+  return(my_out)
+}
+fit_linear()
+
+
+my_parms <- list(x =1:10, y= sort(runif(10)))
+my_parms
+
+
+fit_linear(p=my_parms)
