@@ -2,14 +2,12 @@
 title: "Homework5"
 format: html
 ---
-#This is homework 5 about running functions
+This is homework 5 about running functions
+
+Jackson D'Elia
 
 
-#Jackson D'Elia
-
-
-################
-#Homework 5
+Homework 5
 
 
 ```{r}
@@ -40,10 +38,10 @@ LogGrowth <- Nt()
 ```
 
 
-#Question 2
+Question 2
 
 
-#make a function which creates a plot
+Make a function which creates a plot
 
 
 ```{r}
