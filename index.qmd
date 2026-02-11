@@ -1,7 +1,7 @@
 ---
 title: "Jackson D'Elia"
 ---
-Homeworks
+Homeworks:
 
 - HW3: [Homework 3](Homework_3.html)
 
