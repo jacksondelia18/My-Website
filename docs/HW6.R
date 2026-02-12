@@ -1,5 +1,5 @@
 ################
-#Homework 6
+#Homework 5
 
 #1) Create a funtion that takes the parameters 
 # required to run a logistic growth model and 
