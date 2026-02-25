@@ -14,6 +14,9 @@ Homeworks:
 
 - HW6: [Homework 6](Homework_6.html)
 
+
+- HW7: [Homework 7](Homework_7.html)
+
 ___
 
 
