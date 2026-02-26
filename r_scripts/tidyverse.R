@@ -8,7 +8,6 @@
 #stringr
 
 #ggplot2 - data visualization
-install.packages("sqldf")
 library(sqldf)
 
 
@@ -130,3 +129,93 @@ PivotSW
 wideSW%>%
   pivot_longer(cols=male:female, names_to="sex", values_to="height", values_drop_na=TRUE)
 
+#######
+#class notes day 2
+library(tidyverse)
+library(sqldf)
+ getwd()
+
+species_clean <- read.csv("site_by_species.csv")
+var_clean <- read.csv("site_by_variables.csv")
+
+#subsetting rows
+#dplyr: filter subsets rows
+
+species <- filter(species_clean, Site <30)
+species 
+var <- filter(var_clean, Site <30)
+var
+
+
+#SQL method - you first specify a query to use, then run the sqldf
+
+query <- "SELECT Site, Sp1, Sp2, Sp3 FROM species WHERE Site <'30'" #selects columns from data set, 'where' then filters for some condition
+
+sqldf(query)
+
+edit_species <- species%>%
+  select(Site, Sp1, Sp2, Sp3)
+
+#query the entire data set
+query <- "SELECT * FROM species"
+a<- sqldf(query)
+
+species <- rename(species, Long=Longitude.x., Lat=Latitude.y.)
+head(species)
+
+
+query <- "SELECT Long AS Longitude FROM species"
+sqldf(query)
+
+
+#pulling out all numeric columns
+num_species <- species%>%
+  mutate(letters=rep(letters, length.out=length(species$Site)))
+
+num_species <- select(num_species, Site, Long, Lat, Sp1, letters)
+
+num_species_edit <- select(num_species, where(is.numeric))
+
+
+#pivoting
+#pivot longer lengthens data, decreasing columns and increasing rows
+
+species_long <- pivot_longer(edit_species, cols=c(Sp1, Sp2, Sp3), names_to="ID")
+
+species_wide <- pivot_wider(species_long, names_from="ID")
+
+
+#aggregation of data
+
+#SQL
+query <- "SELECT SUM(Sp1+Sp2+Sp3) AS Occurence FROM species_wide GROUP BY SITE"
+sqldf(query)
+
+#joining data sets together
+#left, right, or union joints
+#start with copes of clean version, leaving original data set in tact (just in case)
+
+edit_species <- species_clean%>%
+  filter(Site<30)%>%
+  select(Site, Sp1, Sp2, Sp3, Sp4, Longitude.x., Latitude.y.)
+
+edit_var <- var_clean%>%
+  filter(Site<30)%>%
+  select(Site, Longitude.x., Latitude.y., BIO1_Annual_mean_temperature, BIO12_Annual_precipitation)
+
+left <- left_join(edit_species, edit_var, by="Site")
+left
+
+inner <- inner_join(edit_species, edit_var, by="Site")
+inner
+#inner loses information if the data sets arent matching
+
+#full joins retain all values with NAs and messier data.
+full<- full_join(edit_species, edit_var, by="Site")
+full
+
+
+#SQL Method
+query <- "SELECT * FROM edit_var RIGHT JOIN edit_species ON edit_var.Site=edit_species.Site;"
+x <- sqldf(query)
+x
